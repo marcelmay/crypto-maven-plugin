@@ -120,6 +120,10 @@
           <target>1.5</target>
         </configuration>
       </plugin>
+      <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>2.7</version>
+      </plugin>
       <!--
       <plugin>
         <artifactId>maven-invoker-plugin</artifactId>
@@ -288,6 +292,30 @@
       </reporting>
     </profile>
     <profile>
+      <id>release</id>
+      <distributionManagement>
+        <repository>
+          <id>consol-mena-releases</id>
+          <url>http://maven.int.consol.ae/content/repositories/releases</url>
+        </repository>
+      </distributionManagement>
+      <!--
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <artifactId>maven-release-plugin</artifactId>
+              <version>2.2.1</version>
+              <configuration>
+                <releaseProfiles>site</releaseProfiles>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+      -->
+    </profile>
+    <profile>
       <!-- Distribution to the target maven repo -->
       <id>dist-labs</id>
       <distributionManagement>
@@ -303,6 +331,17 @@
           <id>site-labs</id>
           <url>scpexe://labs.consol.de/home/mm/www/htdocs/${project.groupId}/${project.artifactId}</url>
         </site>
+      </distributionManagement>
+    </profile>
+    <profile>
+      <!-- Distribution to the target maven repo -->
+      <id>dist-consol-mena</id>
+      <distributionManagement>
+        <snapshotRepository>
+          <id>consol-mena-snapshots</id>
+          <name>Snapshot Repository</name>
+          <url>http://maven.int.consol.ae/content/repositories/snapshots</url>
+        </snapshotRepository>
       </distributionManagement>
     </profile>
   </profiles>
