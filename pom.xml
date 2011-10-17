@@ -18,13 +18,15 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <!--
   <scm>
-    <connection>scm:git:git://github.com/marcelmay/maven-rbc-plugin.git</connection>
-    <developerConnection>scm:git:git@github.com:marcelmay/maven-rbc-plugin.git</developerConnection>
-    <url>http://labs.consol.de/projects/maven/maven-rbc-plugin</url>
+    <connection>scm:git:.</connection>
+    <developerConnection>scm:git:.</developerConnection>
+    <!--
+    <url>http://labs.consol.de/projects/maven/maven-crypto-plugin</url>
+    -->
   </scm>
 
+  <!--
   <issueManagement>
     <system>github</system>
     <url>https://github.com/marcelmay/maven-rbc-plugin/issues</url>
