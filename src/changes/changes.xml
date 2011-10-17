@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ See the documentation at http://maven.apache.org/plugins/maven-changes-plugin/usage.html
+
+ Possible action types: add, fix, remove, update
+
+ For third party updates, please add a link to the release notes!
+ -->
+<document>
+  <properties>
+    <title>Changes</title>
+  </properties>
+  <body>
+    <release version="0.1" date="17.10.2011" description="Initial release 0.1">
+      <action type="add" dev="mm">
+        Initial release, supporting encrypting and decrypting symmetric ciphers.
+      </action>
+    </release>
+  </body>
+</document>
