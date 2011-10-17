@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>net.metacube.maven</groupId>
+  <artifactId>crypto-maven-plugin-it</artifactId>
+  <packaging>jar</packaging>
+  <version>0.1-SNAPSHOT</version>
+  <name>Maven Crypto Plugin IT</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <build>
+    <defaultGoal>net.metacube.maven:crypto-maven-plugin:crypto</defaultGoal>
+    <plugins>
+      <plugin>
+        <groupId>net.metacube.maven</groupId>
+        <artifactId>crypto-maven-plugin</artifactId>
+        <version>0.1-SNAPSHOT</version>
+        <configuration>
+          <fileSets>
+            <fileSet>
+              <directory>src/test/example</directory>
+            </fileSet>
+          </fileSets>
+          <cipherOptions>
+            <operationMode>encrypt</operationMode>
+            <algorithm>AES</algorithm>
+            <algorithmMode>CBC</algorithmMode>
+            <algorithmPadding>PKCS5Padding</algorithmPadding>
+            <secret>metacube</secret>
+            <keyDigest>MD5</keyDigest>
+          </cipherOptions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
