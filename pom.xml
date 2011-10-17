@@ -3,7 +3,7 @@
   <groupId>net.metacube.maven</groupId>
   <artifactId>crypto-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
-  <version>0.2-SNAPSHOT</version>
+  <version>0.1-SNAPSHOT</version>
   <name>Maven Crypto Plugin</name>
   <description>Provides de- and encryption support for artifacts</description>
   <url>http://labs.consol.de/projects/maven/maven-crypto-plugin</url>
@@ -161,6 +161,7 @@
           <argLine>-Xmx256m -Xms256m -Dfile.encoding=UTF8 -Djava.awt.headless=true</argLine>
         </configuration>
       </plugin>
+        <!--
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
@@ -169,6 +170,7 @@
           <releaseProfiles>dist-labs</releaseProfiles>
         </configuration>
       </plugin>
+        -->
     </plugins>
   </build>
 
