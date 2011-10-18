@@ -63,9 +63,11 @@ public class MavenCryptoMojo extends AbstractMojo {
         encrypt(Cipher.ENCRYPT_MODE), decrypt(Cipher.DECRYPT_MODE);
 
         private int mode;
+
         private CipherOperationMode(int pMode) {
             mode = pMode;
         }
+
         public int asInt() {
             return mode;
         }
@@ -79,24 +81,29 @@ public class MavenCryptoMojo extends AbstractMojo {
         public String secret;
         public String keyDigest;
         public String initVector;
+
         public boolean hasInitVector() {
-            return null!=initVector && initVector.length()>0;
+            return null != initVector && initVector.length() > 0;
         }
+
         public boolean hasAlgorithmMode() {
-            return null!=algorithmMode && algorithmMode.length()>0;
+            return null != algorithmMode && algorithmMode.length() > 0;
         }
+
         public boolean hasAlgorithmPadding() {
-            return null!=algorithmPadding && algorithmPadding.length()>0;
+            return null != algorithmPadding && algorithmPadding.length() > 0;
         }
+
         public boolean hasKeyDigest() {
-            return null!=keyDigest && keyDigest.length()>0;
+            return null != keyDigest && keyDigest.length() > 0;
         }
     }
 
     /**
      * Configures the cipher.
      * <p/>
-     * Example (see <a href="http://download.oracle.com/javase/1,5.0/docs/api/javax/crypto/Cipher.html">javax.security.Cipher</a> for details):
+     * Example (see <a href="http://download.oracle.com/javase/1,5.0/docs/api/javax/crypto/Cipher.html">javax.security.Cipher</a>
+     * for details):
      * <pre>
      * &lt;cipherOptions&gt;
      *     &lt;operationMode&gt;encrypt&lt;/operationMode&gt;
@@ -108,7 +115,7 @@ public class MavenCryptoMojo extends AbstractMojo {
      *     &lt;initVector&gt;5&lt;initVector/&gt;
      * &lt;/cipherOptions&gt;
      * </pre>
-     *
+     * <p/>
      * The keyDigest is recommended, to get a 128bit key.
      *
      * @parameter
@@ -134,18 +141,18 @@ public class MavenCryptoMojo extends AbstractMojo {
 
             SecretKeySpec skeySpec = new SecretKeySpec(key, options.algorithm);
             String algorithmSpec = options.algorithm;
-            if(options.hasAlgorithmMode()) {
+            if (options.hasAlgorithmMode()) {
                 algorithmSpec += '/' + options.algorithmMode;
             }
-            if(options.hasAlgorithmPadding()) {
+            if (options.hasAlgorithmPadding()) {
                 algorithmSpec += '/' + options.algorithmPadding;
             }
             if (getLog().isDebugEnabled()) {
-                getLog().debug("Using algorithm "+algorithmSpec);
+                getLog().debug("Using algorithm " + algorithmSpec);
             }
 
             Cipher cipher = Cipher.getInstance(algorithmSpec);
-            if(options.hasInitVector()) {
+            if (options.hasInitVector()) {
                 cipher.init(options.operationMode.asInt(), skeySpec,
                         new IvParameterSpec(DatatypeConverter.parseBase64Binary(options.initVector)));
             } else {
@@ -155,9 +162,9 @@ public class MavenCryptoMojo extends AbstractMojo {
         } catch (InvalidKeyException e) {
             throw new MojoFailureException("Invalid cipher key", e);
         } catch (NoSuchAlgorithmException e) {
-            throw new MojoFailureException("No such cipher algorithm "+options.algorithm, e);
+            throw new MojoFailureException("No such cipher algorithm " + options.algorithm, e);
         } catch (NoSuchPaddingException e) {
-            throw new MojoFailureException("No such cipher padding "+options.algorithmPadding, e);
+            throw new MojoFailureException("No such cipher padding " + options.algorithmPadding, e);
         } catch (UnsupportedEncodingException e) {
             throw new MojoFailureException("Unsupported encoded ", e);
         } catch (InvalidAlgorithmParameterException e) {
@@ -167,8 +174,8 @@ public class MavenCryptoMojo extends AbstractMojo {
 
     private byte[] getCipherKey(final CipherOptions pOptions) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         byte[] key;
-        if(pOptions.hasKeyDigest()) {
-            getLog().info("Using "+ pOptions.keyDigest+" digest of secret key");
+        if (pOptions.hasKeyDigest()) {
+            getLog().info("Using " + pOptions.keyDigest + " digest of secret key");
             final MessageDigest digest = MessageDigest.getInstance(pOptions.keyDigest);
             digest.reset();
             digest.update(pOptions.secret.getBytes("UTF8"));
@@ -180,34 +187,53 @@ public class MavenCryptoMojo extends AbstractMojo {
     }
 
     private void handle(final FileSet pFileSet, final Cipher pCipher) throws IOException {
-        DirectoryScanner s = new DirectoryScanner();
-        s.setBasedir(pFileSet.getDirectory());
+        File dir = new File(pFileSet.getDirectory());
+        CipherOptions options = getCipherOptions();
+        String ext = '.' + options.algorithm;
+        final String[] files = scanIncludes(pFileSet);
+        int padding = computePadding(files);
+        for (String file : files) {
+            String targetFile = updateTargetFilename(file, ext);
+            handleFile(new File(dir, file), new File(getOutputDirectory(), targetFile), pCipher, padding);
+        }
+        if (!options.hasInitVector()) {
+            getLog().info("Generated initialization vector is " + DatatypeConverter.printBase64Binary(pCipher.getIV()));
+        }
+    }
+
+    private int computePadding(final String[] pFileNames) {
+        int max = 0;
+        for (String file : pFileNames) {
+            max = Math.max(max, file.length());
+        }
+        return max;
+    }
+
+    private String updateTargetFilename(final String file, final String pExt) {
+        String targetFile = file;
+        if (targetFile.endsWith(pExt)) {
+            targetFile = targetFile.substring(0, targetFile.length() - pExt.length());
+        } else {
+            targetFile += pExt;
+        }
+        return targetFile;
+    }
+
+    private String[] scanIncludes(final FileSet pFileSet) {
+        DirectoryScanner scanner = new DirectoryScanner();
+        scanner.setBasedir(pFileSet.getDirectory());
         // By default include everything, if no includes are set
         if (pFileSet.getIncludes().size() == 0) {
             pFileSet.getIncludes().add("**/*");
         }
-        s.setExcludes(pFileSet.getExcludes().toArray(new String[pFileSet.getExcludes().size()]));
-        s.setIncludes(pFileSet.getIncludes().toArray(new String[pFileSet.getIncludes().size()]));
-        s.scan();
-
-        File dir = new File(pFileSet.getDirectory());
-        CipherOptions options = getCipherOptions();
-        String ext = '.' + options.algorithm;
-        for (String file : s.getIncludedFiles()) {
-            String targetFile = file;
-            if(targetFile.endsWith(ext)) {
-                targetFile = targetFile.substring(0,targetFile.length()-ext.length());
-            } else {
-                targetFile += ext;
-            }
-            handleFile(new File(dir, file), new File(getOutputDirectory(), targetFile), pCipher);
-        }
-        if(!options.hasInitVector()) {
-            getLog().info("Generated initialization vector is "+ DatatypeConverter.printBase64Binary(pCipher.getIV()));
-        }
+        scanner.setExcludes(pFileSet.getExcludes().toArray(new String[pFileSet.getExcludes().size()]));
+        scanner.setIncludes(pFileSet.getIncludes().toArray(new String[pFileSet.getIncludes().size()]));
+        scanner.scan();
+        return scanner.getIncludedFiles();
     }
 
-    private void handleFile(final File pSourceFile, final File pTargetFile, final Cipher pCipher) throws IOException {
+    private void handleFile(final File pSourceFile, final File pTargetFile, final Cipher pCipher, final int pPadding)
+            throws IOException {
         if (getLog().isDebugEnabled()) {
             getLog().debug("Crypting " + pSourceFile + " to " + pTargetFile);
         }
@@ -215,13 +241,17 @@ public class MavenCryptoMojo extends AbstractMojo {
         FileUtils.copyStreamToFile(new CryptoFileInputStreamFacade(pSourceFile, pCipher), pTargetFile);
         time = System.currentTimeMillis() - time;
 
+        // Show what's going on ...
         StringBuilder buf = new StringBuilder();
-        buf.append(cipherOptions.operationMode==CipherOperationMode.encrypt?"Encrypted ":"Decrypted ");
+        buf.append(cipherOptions.operationMode == CipherOperationMode.encrypt ? "Encrypted " : "Decrypted ");
         buf.append(pSourceFile.getName()).append(" to ").append(pTargetFile.getName()).append(' ');
-        while(buf.length()<71) {
+        String bufEnd = " [" + time + "ms]";
+        int l = Math.max(pPadding * 2 + 15 + (cipherOptions.operationMode == CipherOperationMode.encrypt ? 4 : -4),
+                80 - 8 - bufEnd.length());
+        while (buf.length() < l) {
             buf.append('.');
         }
-        buf.append(" [").append(time).append("ms]");
+        buf.append(bufEnd);
         getLog().info(buf);
     }
 
