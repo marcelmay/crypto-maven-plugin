@@ -16,12 +16,10 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
-import org.apache.maven.execution.MavenSession;
 import org.apache.maven.model.FileSet;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.DirectoryScanner;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.io.FileInputStreamFacade;
@@ -33,16 +31,6 @@ import org.codehaus.plexus.util.io.FileInputStreamFacade;
  * @threadSafe
  */
 public class MavenCryptoMojo extends AbstractMojo {
-    /**
-     * @parameter expression="${project}"
-     */
-    MavenProject project;
-    /**
-     * @parameter default-value="${session}"
-     * @readonly
-     * @required
-     */
-    protected MavenSession session;
     /**
      * List of file sets.
      *
