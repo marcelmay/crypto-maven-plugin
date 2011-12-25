@@ -34,6 +34,15 @@ public class MavenCryptoMojo extends AbstractMojo {
     /**
      * List of file sets.
      *
+     * &lt;filesets&gt;
+     *  &lt;fileset&gt;
+     *    &lt;directory&gt;src/main/some_folder&lt;/directory&gt;
+     *   &lt;includes&gt;
+     *   &lt;include&gt;**\/*.foo&lt;/include&gt;
+     *   &lt;/includes&gt;
+     *  &lt;/fileset&gt;
+     * &lt;/filesets&gt;
+     *
      * @parameter
      * @required
      */
@@ -156,7 +165,7 @@ public class MavenCryptoMojo extends AbstractMojo {
         } catch (UnsupportedEncodingException e) {
             throw new MojoFailureException("Unsupported encoded ", e);
         } catch (InvalidAlgorithmParameterException e) {
-            throw new MojoFailureException("Invalid algorithm paramter ", e);
+            throw new MojoFailureException("Invalid algorithm parameter ", e);
         }
     }
 
