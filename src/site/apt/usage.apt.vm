@@ -23,23 +23,20 @@ Using the Maven Crypto Plugin
 ---
 
 
-[example-report-only.png] Example report
+* Integrate 
 
-   For configuration details see the {{{./report-mojo.html} report goal}} description.
-
-* Integrate for direct invocation
-
-  This is suitable for running a quick check without the overhead of generating the report.
-  Simply add the plugin to your <build> section of your POM:
-
+  
 ---
 <build>
   ...
   <plugins>
     <plugin>
       <groupId>net.metacube.maven</groupId>
-      <artifactId>maven-rbc-plugin</artifactId>
+      <artifactId>maven-crypto-plugin</artifactId>
       <version>${project.version}</version>
+      <configuration>
+      TODO
+      </configuration>
     </plugin>
     ...
   </plugins>
@@ -48,7 +45,7 @@ Using the Maven Crypto Plugin
 
   Now you can invoke the plugin using <mvn crypto:TODO> :
 
-[check-goal.png] Example invocation of check goal
+[crypto-goal.png] Example invocation of crypto goal
 
-  For usage details see the {{{./check-mojo.html} check goal}} description.
+  For usage details see the {{{./crypto-mojo.html} crypto goal}} description.
 
