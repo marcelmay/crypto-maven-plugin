@@ -32,8 +32,10 @@ import org.codehaus.plexus.util.io.FileInputStreamFacade;
  */
 public class MavenCryptoMojo extends AbstractMojo {
     /**
-     * List of file sets.
+     * List of file sets.<br/>
+     * Selects which files to encrypt/decrypt.
      *
+     * <pre>
      * &lt;filesets&gt;
      *  &lt;fileset&gt;
      *    &lt;directory&gt;src/main/some_folder&lt;/directory&gt;
@@ -42,6 +44,7 @@ public class MavenCryptoMojo extends AbstractMojo {
      *   &lt;/includes&gt;
      *  &lt;/fileset&gt;
      * &lt;/filesets&gt;
+     * </pre>
      *
      * @parameter
      * @required
@@ -49,7 +52,7 @@ public class MavenCryptoMojo extends AbstractMojo {
     List<FileSet> fileSets;
 
     /**
-     * Directory containing the generated JAR.
+     * Directory containing the encrypted/decrypted JAR.
      *
      * @parameter default-value="${project.build.directory}"
      * @required
