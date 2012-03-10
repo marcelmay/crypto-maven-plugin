@@ -332,16 +332,5 @@
         </site>
       </distributionManagement>
     </profile>
-    <profile>
-      <!-- Distribution to the target maven repo -->
-      <id>dist-consol-mena</id>
-      <distributionManagement>
-        <snapshotRepository>
-          <id>consol-mena-snapshots</id>
-          <name>Snapshot Repository</name>
-          <url>http://maven.int.consol.ae/content/repositories/snapshots</url>
-        </snapshotRepository>
-      </distributionManagement>
-    </profile>
   </profiles>
 </project>
