@@ -12,6 +12,17 @@
     <title>Changes</title>
   </properties>
   <body>
+    <release version="0.2" date="30.06.2013" description="Release 0.2">
+      <action type="update" dev="mm">
+        Renamed package from net.metacube to de.m3y
+      </action>
+      <action type="update" dev="mm">
+        Site skin update and Maven housekeeping.
+      </action>
+      <action type="fix" dev="mm">
+        Fixed output padding.
+      </action>
+    </release>
     <release version="0.1" date="17.10.2011" description="Initial release 0.1">
       <action type="add" dev="mm">
         Initial release, supporting encrypting and decrypting symmetric ciphers.
