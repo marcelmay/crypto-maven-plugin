@@ -5,8 +5,17 @@
   <skin>
     <groupId>org.apache.maven.skins</groupId>
     <artifactId>maven-fluido-skin</artifactId>
-    <version>1.2.1</version>
+    <version>1.3.0</version>
   </skin>
+  <custom>
+    <fluidoSkin>
+      <gitHub>
+        <projectId>marcelmay/maven-rbc-plugin</projectId>
+        <ribbonOrientation>right</ribbonOrientation>
+        <ribbonColor>black</ribbonColor>
+      </gitHub>
+    </fluidoSkin>
+  </custom>
   <bannerLeft>
     <name>${project.name}</name>
     <src>maven-crypto-plugin.png</src>
