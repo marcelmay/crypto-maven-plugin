@@ -10,7 +10,7 @@
   <custom>
     <fluidoSkin>
       <gitHub>
-        <projectId>marcelmay/maven-rbc-plugin</projectId>
+        <projectId>marcelmay/crypto-maven-plugin</projectId>
         <ribbonOrientation>right</ribbonOrientation>
         <ribbonColor>black</ribbonColor>
       </gitHub>
