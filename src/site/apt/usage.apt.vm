@@ -29,7 +29,7 @@ Using the Maven Crypto Plugin
   ...
   <plugins>
     <plugin>
-      <groupId>net.metacube.maven</groupId>
+      <groupId>de.m3y.maven</groupId>
       <artifactId>crypto-maven-plugin</artifactId>
       <version>${project.version}</version>
       <configuration>

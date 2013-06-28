@@ -1,4 +1,4 @@
-package net.metacube.maven.crypto;
+package de.m3y.maven.crypto;
 
 import java.io.File;
 import java.io.IOException;
@@ -110,7 +110,7 @@ public class MavenCryptoMojo extends AbstractMojo {
      *     &lt;algorithm&gt;AES&lt;/algorithm&gt;
      *     &lt;algorithmMode&gt;CBC&lt;/algorithmMode&gt;
      *     &lt;algorithmPadding&gt;PKCS5Padding&lt;/algorithmPadding&gt;
-     *     &lt;secret&gt;metacube&lt;/secret&gt;
+     *     &lt;secret&gt;m3y&lt;/secret&gt;
      *     &lt;keyDigest&gt;MD5&lt;keyDigest/&gt;
      *     &lt;initVector&gt;5&lt;initVector/&gt;
      * &lt;/cipherOptions&gt;
