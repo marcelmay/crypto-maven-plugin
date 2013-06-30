@@ -18,7 +18,6 @@
   </custom>
   <bannerLeft>
     <name>${project.name}</name>
-    <src>maven-crypto-plugin.png</src>
     <href>${project.url}</href>
   </bannerLeft>
   <version position="right"/>
