@@ -155,7 +155,6 @@
           <argLine>-Xmx256m -Xms256m -Dfile.encoding=UTF8 -Djava.awt.headless=true</argLine>
         </configuration>
       </plugin>
-        <!--
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
@@ -164,7 +163,6 @@
           <releaseProfiles>dist-labs</releaseProfiles>
         </configuration>
       </plugin>
-        -->
     </plugins>
   </build>
 
