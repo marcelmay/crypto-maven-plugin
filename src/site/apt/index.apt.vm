@@ -1,0 +1,11 @@
+ ------
+ Intro
+ ------
+ Marcel May
+ ------
+
+Introduction
+
+  The Maven Crypto Plugin supports encrypting and decrypting resources when including in Maven artifact.
+
+  See {{{./usage.html} usage}} or {{{https://github.com/marcelmay/crypto-maven-plugin/tree/master/src/it} integration test examples}}

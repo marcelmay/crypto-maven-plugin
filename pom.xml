@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.m3y.maven</groupId>
   <artifactId>crypto-maven-plugin</artifactId>
@@ -6,7 +7,7 @@
   <version>0.3-SNAPSHOT</version>
   <name>Maven Crypto Plugin</name>
   <description>Provides de- and encryption support for artifacts</description>
-  <url>http://labs.consol.de/projects/maven/crypto-maven-plugin</url>
+  <url>http://marcelmay.github.io/crypto-maven-plugin</url>
   <inceptionYear>2011</inceptionYear>
 
   <prerequisites>
@@ -20,7 +21,7 @@
   <scm>
     <connection>scm:git:git://github.com/marcelmay/crypto-maven-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:marcelmay/crypto-maven-plugin.git</developerConnection>
-    <url>http://labs.consol.de/projects/maven/crypto-maven-plugin</url>
+    <url>https://github.com/marcelmay/crypto-maven-plugin</url>
   </scm>
 
   <issueManagement>
@@ -44,8 +45,6 @@
         <role>Author</role>
         <role>Developer</role>
       </roles>
-      <organization>ConSol* Software GmbH</organization>
-      <organizationUrl>http://www.consol.de</organizationUrl>
     </developer>
   </developers>
 
@@ -107,23 +106,23 @@
     <plugins>
       <plugin>
         <artifactId>maven-plugin-plugin</artifactId>
-        <version>3.2</version>
+        <version>3.5</version>
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
+        <version>3.5.1</version>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
+          <source>1.7</source>
+          <target>1.7</target>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
-        <version>2.7</version>
+        <version>2.8.2</version>
       </plugin>
       <plugin>
         <artifactId>maven-invoker-plugin</artifactId>
-        <version>1.8</version>
+        <version>2.0.0</version>
         <configuration>
           <projectsDirectory>src/it</projectsDirectory>
           <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
@@ -148,7 +147,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.15</version>
+        <version>2.19.1</version>
         <configuration>
           <failIfNoTests>false</failIfNoTests>
           <workingDirectory>${project.build.directory}</workingDirectory>
@@ -158,7 +157,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
-        <version>2.2.1</version>
+        <version>2.5.3</version>
         <configuration>
           <releaseProfiles>dist-labs</releaseProfiles>
         </configuration>
@@ -168,76 +167,33 @@
 
   <profiles>
     <profile>
-      <id>repos</id>
-      <repositories>
-        <repository>
-          <id>consol-labs-release</id>
-          <url>http://labs.consol.de/maven/repository/</url>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-        </repository>
-        <repository>
-          <id>consol-labs-snapshots</id>
-          <url>http://labs.consol.de/maven/snapshots-repository/</url>
-          <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>daily</updatePolicy>
-          </snapshots>
-          <releases>
-            <enabled>false</enabled>
-          </releases>
-        </repository>
-        <repository>
-          <id>codehaus.org</id>
-          <url>http://repository.codehaus.org/</url>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-        </repository>
-      </repositories>
-      <activation>
-        <file>
-          <missing>AFileWhichReallyNeverOccurs.WeNeedThisProfileAlways</missing>
-        </file>
-      </activation>
-    </profile>
-    <profile>
       <id>site</id>
       <build>
         <plugins>
           <plugin>
             <artifactId>maven-site-plugin</artifactId>
-            <version>3.3</version>
-            <configuration>
-            <!--
-              <templateFile>src/site/template.vm</templateFile>
-              -->
-            </configuration>
+            <version>3.5.1</version>
           </plugin>
-          <!--
-                 <plugin>
-                   <groupId>org.apache.maven.plugins</groupId>
-                   <artifactId>maven-docck-plugin</artifactId>
-                   <version>1.0</version>
-                   <executions>
-                     <execution>
-                       <goals>
-                         <goal>check</goal>
-                       </goals>
-                     </execution>
-                   </executions>
-                 </plugin>
-          -->
+          <plugin>
+            <groupId>com.github.github</groupId>
+            <artifactId>site-maven-plugin</artifactId>
+            <version>0.12</version>
+            <configuration>
+              <message>Creating site for ${project.groupId}:${project.artifactId}:${project.version}</message>
+              <server>github</server>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>site</goal>
+                </goals>
+                <phase>site</phase>
+              </execution>
+            </executions>
+          </plugin>
           <plugin>
             <artifactId>maven-project-info-reports-plugin</artifactId>
-            <version>2.7</version>
+            <version>2.9</version>
           </plugin>
         </plugins>
       </build>
@@ -245,7 +201,7 @@
         <plugins>
           <plugin>
             <artifactId>maven-project-info-reports-plugin</artifactId>
-            <version>2.7</version>
+            <version>2.9</version>
             <reportSets>
               <reportSet>
                 <reports>
@@ -265,19 +221,15 @@
           </plugin>
           <plugin>
             <artifactId>maven-plugin-plugin</artifactId>
-            <version>3.2</version>
-          </plugin>
-          <plugin>
-            <artifactId>maven-changes-plugin</artifactId>
-            <version>2.9</version>
+            <version>3.5</version>
           </plugin>
           <plugin>
             <artifactId>maven-surefire-report-plugin</artifactId>
-            <version>2.15</version>
+            <version>2.19.1</version>
           </plugin>
           <plugin>
             <artifactId>maven-jxr-plugin</artifactId>
-            <version>2.3</version>
+            <version>2.5</version>
           </plugin>
           <plugin>
             <artifactId>maven-invoker-plugin</artifactId>
@@ -286,26 +238,28 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-pmd-plugin</artifactId>
-            <version>3.0.1</version>
+            <version>3.6</version>
           </plugin>
         </plugins>
       </reporting>
     </profile>
     <profile>
       <id>release</id>
+      <!-- TODO
       <distributionManagement>
         <repository>
-          <id>consol-mena-releases</id>
-          <url>http://maven.int.consol.ae/content/repositories/releases</url>
+          <id></id>
+          <url></url>
         </repository>
       </distributionManagement>
+      -->
       <!--
       <build>
         <pluginManagement>
           <plugins>
             <plugin>
               <artifactId>maven-release-plugin</artifactId>
-              <version>2.2.1</version>
+              <version>2.5.3</version>
               <configuration>
                 <releaseProfiles>site</releaseProfiles>
               </configuration>
@@ -314,24 +268,6 @@
         </pluginManagement>
       </build>
       -->
-    </profile>
-    <profile>
-      <!-- Distribution to the target maven repo -->
-      <id>dist-labs</id>
-      <distributionManagement>
-        <repository>
-          <id>consol-labs-release</id>
-          <url>scpexe://labs.consol.de/home/maven-repository/www/htdocs/repository</url>
-        </repository>
-        <snapshotRepository>
-          <id>consol-labs-snapshots</id>
-          <url>scpexe://labs.consol.de/home/maven-repository/www/htdocs/snapshots-repository</url>
-        </snapshotRepository>
-        <site>
-          <id>site-labs</id>
-          <url>scpexe://labs.consol.de/home/mm/www/htdocs/${project.groupId}/${project.artifactId}</url>
-        </site>
-      </distributionManagement>
     </profile>
   </profiles>
 </project>

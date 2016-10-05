@@ -11,7 +11,7 @@ What is it good for?
 
 Check out the [plugin web site][site] for details.
 
-[site]: http://labs.consol.de/projects/maven/crypt-maven-plugin/
+[site]: http://marcelmay.github.io/crypto-maven-plugin/
 
 Development
 -----------

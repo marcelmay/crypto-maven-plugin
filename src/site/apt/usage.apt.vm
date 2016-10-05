@@ -6,23 +6,7 @@
  
 Using the Maven Crypto Plugin
 
-  The first step is configuring Maven with the repository containing the plugin.
-  Add the <pluginRepository> entry either to your {{{http://maven.apache.org/ref/3.0.3/maven-model/maven.html#class_pluginRepository}pom.xml}} or global {{{http://maven.apache.org/ref/3.0.3/maven-settings/settings.html#class_pluginRepository}settings.xml}}.
-
----
-<pluginRepository>
-  <id>consol-labs-release</id>
-  <url>http://labs.consol.de/maven/repository/</url>
-  <snapshots>
-    <enabled>false</enabled>
-  </snapshots>
-  <releases>
-    <enabled>true</enabled>
-  </releases>
-</pluginRepository>
----
-
-   In the next step we'll add the plugin to the POM and configure it to encrypt a file <foo.jar>.
+  The first step we'll add the plugin to the POM and configure it to encrypt a file <foo.jar>.
 
 ---
 <build>
