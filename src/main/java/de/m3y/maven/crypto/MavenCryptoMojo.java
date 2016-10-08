@@ -1,5 +1,21 @@
 package de.m3y.maven.crypto;
 
+import org.apache.maven.model.FileSet;
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.codehaus.plexus.util.DirectoryScanner;
+import org.codehaus.plexus.util.FileUtils;
+import org.codehaus.plexus.util.io.FileInputStreamFacade;
+
+import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,32 +25,16 @@ import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import javax.crypto.Cipher;
-import javax.crypto.CipherInputStream;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
-import javax.xml.bind.DatatypeConverter;
-
-import org.apache.maven.model.FileSet;
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
-import org.codehaus.plexus.util.DirectoryScanner;
-import org.codehaus.plexus.util.FileUtils;
-import org.codehaus.plexus.util.io.FileInputStreamFacade;
 
 /**
  * Supports de- and encryption of artifacts.
- *
- * @goal crypto
- * @threadSafe
  */
+@Mojo(name = "crypto", threadSafe = true)
 public class MavenCryptoMojo extends AbstractMojo {
     /**
      * List of file sets.<br/>
      * Selects which files to encrypt/decrypt.
-     *
+     * <p>
      * <pre>
      * &lt;filesets&gt;
      *  &lt;fileset&gt;
@@ -45,18 +45,15 @@ public class MavenCryptoMojo extends AbstractMojo {
      *  &lt;/fileset&gt;
      * &lt;/filesets&gt;
      * </pre>
-     *
-     * @parameter
-     * @required
      */
+    @Parameter(required = true)
     List<FileSet> fileSets;
 
     /**
      * Directory containing the encrypted/decrypted JAR.
-     *
-     * @parameter default-value="${project.build.directory}"
-     * @required
      */
+    @Parameter(defaultValue = "${project.build.directory}",
+            required = true)
     private File outputDirectory;
 
     public enum CipherOperationMode {
@@ -117,10 +114,8 @@ public class MavenCryptoMojo extends AbstractMojo {
      * </pre>
      * <p/>
      * The keyDigest is recommended, to get a 128bit key.
-     *
-     * @parameter
-     * @required
      */
+    @Parameter(required = true)
     private CipherOptions cipherOptions;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
