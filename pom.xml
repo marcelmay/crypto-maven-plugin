@@ -207,8 +207,6 @@
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
-          <pushChanges>false</pushChanges>
-          <releaseLabel>releases/${project.version}</releaseLabel>
           <releaseProfiles>release</releaseProfiles>
         </configuration>
       </plugin>
