@@ -3,7 +3,7 @@
   <groupId>de.m3y.maven</groupId>
   <artifactId>crypto-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <name>Maven Crypto Plugin</name>
   <description>Provides de- and encryption support for artifacts</description>
   <url>http://marcelmay.github.io/crypto-maven-plugin</url>
@@ -21,7 +21,7 @@
     <connection>scm:git:git://github.com/marcelmay/crypto-maven-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:marcelmay/crypto-maven-plugin.git</developerConnection>
     <url>https://github.com/marcelmay/crypto-maven-plugin</url>
-    <tag>crypto-maven-plugin-1.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <issueManagement>
