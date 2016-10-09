@@ -4,7 +4,7 @@
   <groupId>de.m3y.maven</groupId>
   <artifactId>crypto-maven-plugin-decrypt-it</artifactId>
   <packaging>jar</packaging>
-  <version>0.1-SNAPSHOT</version>
+  <version>@cryptoMavenPluginVersion@</version>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,7 +16,7 @@
       <plugin>
         <groupId>de.m3y.maven</groupId>
         <artifactId>crypto-maven-plugin</artifactId>
-        <version>0.2-SNAPSHOT</version>
+        <version>@cryptoMavenPluginVersion@</version>
         <configuration>
           <fileSets>
             <fileSet>

@@ -136,10 +136,11 @@
             <pomInclude>*/pom.xml</pomInclude>
           </pomIncludes>
           <filterProperties>
-            <mavenRbcPluginVersion>${project.version}</mavenRbcPluginVersion>
+            <cryptoMavenPluginVersion>${project.version}</cryptoMavenPluginVersion>
           </filterProperties>
           <showVersion>true</showVersion>
           <showErrors>true</showErrors>
+          <suppressSummaries>true</suppressSummaries>
         </configuration>
         <executions>
           <execution>
