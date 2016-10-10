@@ -7,10 +7,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Marcel May" />
     <meta name="Date-Revision-yyyymmdd" content="20161010" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>Maven Crypto Plugin &#x2013; Intro</title>
+    <title>Maven Crypto Plugin &#x2013; crypto:crypto</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.5.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -54,7 +53,7 @@
         Maven</a>
                     <span class="divider">/</span>
       </li>
-        <li class="active ">Intro</li>
+        <li class="active ">crypto:crypto</li>
         
               
                   <li id="publishDate" class="pull-right"><span class="divider">|</span> Last Published: 2016-10-10</li>
@@ -73,10 +72,12 @@
                 <ul class="nav nav-list">
                     <li class="nav-header">Overview</li>
                               
-      <li class="active">
+      <li>
   
-            <a href="#"><span class="none"></span>Introduction</a>
-          </li>
+                          <a href="index.html" title="Introduction">
+          <span class="none"></span>
+        Introduction</a>
+            </li>
                 
       <li>
   
@@ -133,10 +134,174 @@
                 
         <div id="bodyColumn"  class="span10" >
                                   
-            <div class="section">
-<h2><a name="Introduction"></a>Introduction</h2>
-<p>The Maven Crypto Plugin supports encrypting and decrypting resources when including in Maven artifact.</p>
-<p>See <a href="./usage.html"> usage</a> or <a class="externalLink" href="https://github.com/marcelmay/crypto-maven-plugin/tree/master/src/it"> integration test examples</a></p></div>
+            
+  
+    <div class="section">
+<h2><a name="crypto:crypto"></a>crypto:crypto</h2>
+      
+<p><b>Full name</b>:</p>
+      
+<p>de.m3y.maven:crypto-maven-plugin:1.0:crypto</p>
+      
+<p><b>Description</b>:</p>
+      
+<div>Supports de- and encryption of artifacts.</div>
+      
+<p><b>Attributes</b>:</p>
+      
+<ul>
+        
+<li>Requires a Maven project to be executed.</li>
+      </ul>
+      
+<div class="section">
+<h3><a name="Required_Parameters"></a>Required Parameters</h3>
+        
+<table class="table table-striped" border="0">
+          
+<tr class="a">
+            
+<th>Name</th>
+            
+<th>Type</th>
+            
+<th>Since</th>
+            
+<th>Description</th>
+          </tr>
+          
+<tr class="b">
+            
+<td><b><a href="#cipherOptions">cipherOptions</a></b></td>
+            
+<td><tt>MavenCryptoMojo$CipherOptions</tt></td>
+            
+<td><tt>-</tt></td>
+            
+<td>Configures the cipher. Example (see <a class="externalLink" href="http://download.oracle.com/javase/1,5.0/docs/api/javax/crypto/Cipher.html">javax.security.Cipher</a>
+for details): 
+
+<div>
+<pre>
+&lt;cipherOptions&gt;
+    &lt;operationMode&gt;encrypt&lt;/operationMode&gt;
+    &lt;algorithm&gt;AES&lt;/algorithm&gt;
+    &lt;algorithmMode&gt;CBC&lt;/algorithmMode&gt;
+    &lt;algorithmPadding&gt;PKCS5Padding&lt;/algorithmPadding&gt;
+    &lt;secret&gt;m3y&lt;/secret&gt;
+    &lt;keyDigest&gt;MD5&lt;keyDigest/&gt;
+    &lt;initVector&gt;5&lt;initVector/&gt;
+&lt;/cipherOptions&gt;
+</pre></div>
+
+The keyDigest is recommended, to get a 128bit key.<br /></td>
+          </tr>
+          
+<tr class="a">
+            
+<td><b><a href="#fileSets">fileSets</a></b></td>
+            
+<td><tt>List</tt></td>
+            
+<td><tt>-</tt></td>
+            
+<td>List of file sets.<br />
+Selects which files to encrypt/decrypt. 
+
+<div>
+<pre>
+&lt;filesets&gt;
+ &lt;fileset&gt;
+   &lt;directory&gt;src/main/some_folder&lt;/directory&gt;
+  &lt;includes&gt;
+  &lt;include&gt;**\/*.foo&lt;/include&gt;
+  &lt;/includes&gt;
+ &lt;/fileset&gt;
+&lt;/filesets&gt;
+</pre></div><br /></td>
+          </tr>
+          
+<tr class="b">
+            
+<td><b><a href="#outputDirectory">outputDirectory</a></b></td>
+            
+<td><tt>File</tt></td>
+            
+<td><tt>-</tt></td>
+            
+<td>Directory containing the encrypted/decrypted JAR.<br /><b>Default value is</b>: <tt>${project.build.directory}</tt>.<br /></td>
+          </tr>
+        </table>
+      </div>
+      
+<div class="section">
+<h3><a name="Parameter_Details"></a>Parameter Details</h3>
+        
+<p><b><a name="cipherOptions">cipherOptions</a>:</b></p>
+        
+<div>Configures the cipher. Example (see <a class="externalLink" href="http://download.oracle.com/javase/1,5.0/docs/api/javax/crypto/Cipher.html">javax.security.Cipher</a>
+for details): 
+
+<div>
+<pre>
+&lt;cipherOptions&gt;
+    &lt;operationMode&gt;encrypt&lt;/operationMode&gt;
+    &lt;algorithm&gt;AES&lt;/algorithm&gt;
+    &lt;algorithmMode&gt;CBC&lt;/algorithmMode&gt;
+    &lt;algorithmPadding&gt;PKCS5Padding&lt;/algorithmPadding&gt;
+    &lt;secret&gt;m3y&lt;/secret&gt;
+    &lt;keyDigest&gt;MD5&lt;keyDigest/&gt;
+    &lt;initVector&gt;5&lt;initVector/&gt;
+&lt;/cipherOptions&gt;
+</pre></div>
+
+The keyDigest is recommended, to get a 128bit key.</div>
+        
+<ul>
+          
+<li><b>Type</b>: <tt>de.m3y.maven.crypto.MavenCryptoMojo$CipherOptions</tt></li>
+          
+<li><b>Required</b>: <tt>Yes</tt></li>
+        </ul><hr />
+<p><b><a name="fileSets">fileSets</a>:</b></p>
+        
+<div>List of file sets.<br />
+Selects which files to encrypt/decrypt. 
+
+<div>
+<pre>
+&lt;filesets&gt;
+ &lt;fileset&gt;
+   &lt;directory&gt;src/main/some_folder&lt;/directory&gt;
+  &lt;includes&gt;
+  &lt;include&gt;**\/*.foo&lt;/include&gt;
+  &lt;/includes&gt;
+ &lt;/fileset&gt;
+&lt;/filesets&gt;
+</pre></div></div>
+        
+<ul>
+          
+<li><b>Type</b>: <tt>java.util.List</tt></li>
+          
+<li><b>Required</b>: <tt>Yes</tt></li>
+        </ul><hr />
+<p><b><a name="outputDirectory">outputDirectory</a>:</b></p>
+        
+<div>Directory containing the encrypted/decrypted JAR.</div>
+        
+<ul>
+          
+<li><b>Type</b>: <tt>java.io.File</tt></li>
+          
+<li><b>Required</b>: <tt>Yes</tt></li>
+          
+<li><b>Default</b>: <tt>${project.build.directory}</tt></li>
+        </ul>
+      </div>
+    </div>
+  
+
                   </div>
             </div>
           </div>

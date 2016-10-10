@@ -7,10 +7,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Marcel May" />
     <meta name="Date-Revision-yyyymmdd" content="20161010" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>Maven Crypto Plugin &#x2013; Intro</title>
+    <title>Maven Crypto Plugin &#x2013; Plugin Documentation</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.5.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -54,7 +53,7 @@
         Maven</a>
                     <span class="divider">/</span>
       </li>
-        <li class="active ">Intro</li>
+        <li class="active ">Plugin Documentation</li>
         
               
                   <li id="publishDate" class="pull-right"><span class="divider">|</span> Last Published: 2016-10-10</li>
@@ -73,10 +72,12 @@
                 <ul class="nav nav-list">
                     <li class="nav-header">Overview</li>
                               
-      <li class="active">
+      <li>
   
-            <a href="#"><span class="none"></span>Introduction</a>
-          </li>
+                          <a href="index.html" title="Introduction">
+          <span class="none"></span>
+        Introduction</a>
+            </li>
                 
       <li>
   
@@ -85,12 +86,10 @@
         Usage</a>
             </li>
                 
-      <li>
+      <li class="active">
   
-                          <a href="plugin-info.html" title="Goals">
-          <span class="none"></span>
-        Goals</a>
-            </li>
+            <a href="#"><span class="none"></span>Goals</a>
+          </li>
                 
       <li>
   
@@ -106,13 +105,20 @@
           <span class="icon-chevron-right"></span>
         Project Information</a>
                   </li>
-                                                                  
+                                                                            
       <li>
   
                           <a href="project-reports.html" title="Project Reports">
-          <span class="icon-chevron-right"></span>
+          <span class="icon-chevron-down"></span>
         Project Reports</a>
-                  </li>
+                    <ul class="nav nav-list">
+                    
+      <li class="active">
+  
+            <a href="#"><span class="none"></span>Plugin Documentation</a>
+          </li>
+              </ul>
+        </li>
             </ul>
               
                 
@@ -134,9 +140,62 @@
         <div id="bodyColumn"  class="span10" >
                                   
             <div class="section">
-<h2><a name="Introduction"></a>Introduction</h2>
-<p>The Maven Crypto Plugin supports encrypting and decrypting resources when including in Maven artifact.</p>
-<p>See <a href="./usage.html"> usage</a> or <a class="externalLink" href="https://github.com/marcelmay/crypto-maven-plugin/tree/master/src/it"> integration test examples</a></p></div>
+<h2><a name="Plugin_Documentation"></a>Plugin Documentation</h2><a name="Plugin_Documentation"></a>
+<p>Goals available for this plugin:</p>
+<table border="0" class="table table-striped">
+<tr class="a">
+<th>Goal</th>
+<th>Description</th></tr>
+<tr class="b">
+<td><a href="crypto-mojo.html">crypto:crypto</a></td>
+<td>Supports de- and encryption of artifacts.</td></tr></table>
+<div class="section">
+<h3><a name="System_Requirements"></a>System Requirements</h3><a name="System_Requirements"></a>
+<p>The following specifies the minimum requirements to run this Maven plugin:</p>
+<table border="0" class="table table-striped">
+<tr class="a">
+<td>Maven</td>
+<td>3.3.9</td></tr>
+<tr class="b">
+<td>JDK</td>
+<td>1.7</td></tr>
+<tr class="a">
+<td>Memory</td>
+<td>No minimum requirement.</td></tr>
+<tr class="b">
+<td>Disk Space</td>
+<td>No minimum requirement.</td></tr></table></div>
+<div class="section">
+<h3><a name="Usage"></a>Usage</h3><a name="Usage"></a>
+<p>You should specify the version in your project's plugin configuration:</p>
+<div class="source"><pre class="prettyprint">&lt;project&gt;
+  ...
+  &lt;build&gt;
+    &lt;!-- To define the plugin version in your parent POM --&gt;
+    &lt;pluginManagement&gt;
+      &lt;plugins&gt;
+        &lt;plugin&gt;
+          &lt;groupId&gt;de.m3y.maven&lt;/groupId&gt;
+          &lt;artifactId&gt;crypto-maven-plugin&lt;/artifactId&gt;
+          &lt;version&gt;1.0&lt;/version&gt;
+        &lt;/plugin&gt;
+        ...
+      &lt;/plugins&gt;
+    &lt;/pluginManagement&gt;
+    &lt;!-- To use the plugin goals in your POM or parent POM --&gt;
+    &lt;plugins&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;de.m3y.maven&lt;/groupId&gt;
+        &lt;artifactId&gt;crypto-maven-plugin&lt;/artifactId&gt;
+        &lt;version&gt;1.0&lt;/version&gt;
+      &lt;/plugin&gt;
+      ...
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+  ...
+&lt;/project&gt;
+</pre></div>
+<p>For more information, see <a class="externalLink" href="http://maven.apache.org/guides/mini/guide-configuring-plugins.html">&quot;Guide to Configuring Plug-ins&quot;</a></p></div></div>
                   </div>
             </div>
           </div>
