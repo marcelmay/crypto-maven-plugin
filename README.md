@@ -3,6 +3,8 @@ Maven Crypto Plugin
 
 The plugin *crypto-maven-plugin* lets you encrypt and decrypt resources.
 
+[![Maven Central](https://img.shields.io/maven-central/v/de.m3y.maven/crypto-maven-plugin.svg)](http://search.maven.org/#search%7Cga%7C1%7Cde.m3y.maven.crypto)
+
 What is it good for?
 --------------------
 
